@@ -13,9 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import Model.Update;
 import java.util.ArrayList;
-import java.sql.SQLException;
 import java.util.List;
 
 public class Controller {
@@ -35,7 +33,8 @@ public class Controller {
     public TableColumn<Update, String> description;
     public TableColumn<Update, String> publishedBy;
     public TableColumn<Update, String> publishedDate;
-    public TableView tblview_categories;
+    public TableView<Category> tblview_categories;
+    public TableColumn<Category, String> categoryName;
 
     public Controller (Model model, View view) {
         this.model = model;
@@ -108,8 +107,12 @@ public class Controller {
         String ans = model.addEventUpdate(update_events.getValue());
     }
 
-    public void showCategories() throws SQLException {
+    public void showCategories() {
         List<Category> ans = model.showCategory();
+        categoryName.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
+        ObservableList<Category> categoryModel = FXCollections.observableArrayList(ans);
+        tblview_categories.setItems(categoryModel);
+        view.onShowEventUpdates();
     }
 
     /**
