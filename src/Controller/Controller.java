@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import Model.Update;
+
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -65,7 +68,8 @@ public class Controller {
     }
 
     public void showEventUpdates() {
-
+        ArrayList<Update> ans =model.showEventUpdates((int)update_events.getValue());
+        view.onShowEventUpdates();
     }
 
     public void updateEvent() {
@@ -75,9 +79,10 @@ public class Controller {
     public void addEventFeedback() {
 
     }
-
+//public void sendFeedback(int eventID, String feedbackedUserName, int value) {
     public void sendFeedback() {
-
+        model.sendFeedback((int)update_events.getValue(),(String)feedback_users.getValue(),(int)feedback_ranks.getValue());
+        view.onSendFeedback();
     }
 
     public void addEventUpdate() {

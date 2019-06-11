@@ -72,8 +72,23 @@ public class Model {
 
     }
 
-    public void sendFeedback() {
+    public void sendFeedback(int eventID, String feedbackedUserName, int value) {
 
+            String sql = "INSERT INTO eventFeedbacks(eventID, feedbackeduserName, feedbackerUserName, value) VALUES(?,?,?,?,?,?)";
+
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, eventID);
+                pstmt.setString(2, feedbackedUserName);
+                pstmt.setString(3, curr_connected_username);
+                pstmt.setInt(4, value);
+
+                //execute query
+                pstmt.executeUpdate();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
     }
 
     public void addEventUpdate() {
