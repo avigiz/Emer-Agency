@@ -1,18 +1,16 @@
 package Model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Category {
 
-    String name;
+    private SimpleStringProperty categoryName;
 
     public Category(String name){
-        this.name = name;
+        this.categoryName = new SimpleStringProperty(name);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getcategoryName() {
+        return categoryName;
     }
 }

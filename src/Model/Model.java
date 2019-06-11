@@ -45,8 +45,7 @@ public class Model {
         return false;
     }
 
-
-    public List<Category> showCategory() throws SQLException {
+    public List<Category> showCategory() {
         String sql = "SELECT * FROM categories";
         ResultSet m_results;
         try (Connection conn = this.connect();
@@ -102,7 +101,8 @@ public class Model {
                 ResultSet rs = pstmt.executeQuery();
                 while ( rs.next() ) {
                     Update currUpdate = new Update(rs.getInt("updateID"), rs.getString("publishedUser"),
-                            rs.getString("eventName"),rs.getString("publishedDate"), rs.getString("description"));
+                            rs.getString("eventName"), rs.getString("description"),
+                            rs.getString("publishedDate"), rs.getInt("index"));
                     ans.add( currUpdate );
                 }
                 return ans;
