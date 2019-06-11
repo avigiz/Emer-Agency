@@ -1,9 +1,10 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class Model {
 
@@ -38,5 +39,49 @@ public class Model {
     public boolean addCategory(String category) {
         // TODO : CHECK IF CATEGORY ALREADY EXISTS, AND ADD IT IF NOT
         return false;
+    }
+
+    public List<Category> showCategory() throws SQLException {
+        String sql = "SELECT * FROM categories";
+        ResultSet m_results;
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            m_results = pstmt.executeQuery(sql);
+            List<Category> ans = new ArrayList<>();
+            int i = 0;
+            while (i < m_results.getFetchSize()){
+                String tmp =(m_results.getString(i));
+                ans.add(new Category(tmp));
+                i++;
+            }
+            return ans;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+
+    public String addEventUpdate(Object value) {
+        String insertSQL1 = "INSERT INTO eventUpdates (eventID,updateID,publishedDate,publishedUser,index)"
+                +   " VALUES(?,?,?,?,?)";
+        String selectSQL1 = "SELECT * FROM eventUpdates WHERE eventID = ?";
+        String eventName = (String)value;
+        try (Connection conn = this.connect();
+             PreparedStatement insrert1 = conn.prepareStatement(insertSQL1);
+            ) {
+            insrert1.setString(1,eventName);
+            Random rnd = new Random();
+            Integer random = rnd.nextInt(100);
+            insrert1.setString(2,random.toString());
+            insrert1.setString(3,Calendar.getInstance().toString());
+            insrert1.setString(4,curr_connected_username);
+            insrert1.setInt(5,selectSQL1.length()+1);
+            return "ok";
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return "notOK";
+        }
     }
 }

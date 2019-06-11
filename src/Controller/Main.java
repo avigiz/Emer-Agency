@@ -67,7 +67,7 @@ public class Main extends Application {
                 + "	updateID text PRIMARY KEY\n"
                 + "	publishedDate text NOT NULL\n"
                 + "	publishedUser text NOT NULL\n"
-                + "	index text NOT NULL\n"
+                + "	index integer NOT NULL\n"
                 + ");";
         String sqlusersEvents = "CREATE TABLE IF NOT EXISTS usersEvents (\n"
                 + "	eventID text PRIMARY KEY\n"
