@@ -91,10 +91,9 @@ public class Controller {
     public void addEventFeedback() {
 
     }
-//public void sendFeedback(int eventID, String feedbackedUserName, int value) {
+
     public void sendFeedback() {
         model.sendFeedback((int)update_events.getValue(),(String)feedback_users.getValue(),(int)feedback_ranks.getValue());
-        view.onSendFeedback();
     }
 
     public void addEventUpdate() {

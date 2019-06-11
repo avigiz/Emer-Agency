@@ -75,6 +75,7 @@ public class Main extends Application {
                 + "	eventID integer PRIMARY KEY\n"
                 + "	userName text PRIMARY KEY\n"
                 + "	authorization text NOT NULL\n"
+                + "	title text NOT NULL\n"
                 + ");";
         String sqleventFeedbacks = "CREATE TABLE IF NOT EXISTS eventFeedbacks (\n"
                 + "	eventID integer PRIMARY KEY\n"
