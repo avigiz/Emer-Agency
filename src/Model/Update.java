@@ -1,25 +1,27 @@
 package Model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Update {
 
     private int updateId;
-    private Update beforeUpdate;
-    private String publishedBy;
-    private int eventID;
-    private String description;
-    private String publishedDate;
+    private SimpleStringProperty publishedBy;
+    private SimpleStringProperty eventName;
+    private SimpleStringProperty description;
+    private SimpleStringProperty publishedDate;
+    private SimpleIntegerProperty index;
 
-    public Update (int updateId, String publishedBy, int eventID, String description, String publishedDate){
-//        this.beforeUpdate = beforeUpdate;
-        this.description = description;
-        this.eventID = eventID;
+    public Update (int updateId, String publishedBy, String eventName, String description, String publishedDate, int index){
+        this.description = new SimpleStringProperty(description);
+        this.eventName = new SimpleStringProperty(eventName);
         this.updateId = updateId;
-        this.publishedBy  = publishedBy;
-        this.publishedDate = publishedDate;
-
+        this.publishedBy  = new SimpleStringProperty(publishedBy);
+        this.publishedDate = new SimpleStringProperty(publishedDate);
+        this.index = new SimpleIntegerProperty(index);
     }
 
-    public String getPublishedDate() {
+    public SimpleStringProperty getPublishedDate() {
         return publishedDate;
     }
 
@@ -27,19 +29,19 @@ public class Update {
         return updateId;
     }
 
-    public Update getBeforeUpdate() {
-        return beforeUpdate;
-    }
-
-    public String getPublishedBy() {
+    public SimpleStringProperty getPublishedBy() {
         return publishedBy;
     }
 
-    public int getEventConectedTo() {
-        return eventID;
+    public SimpleStringProperty getDescription() {
+        return description;
     }
 
-    public String getDescription() {
-        return description;
+    public SimpleIntegerProperty getIndex() {
+        return index;
+    }
+
+    public SimpleStringProperty getEventName() {
+        return eventName;
     }
 }

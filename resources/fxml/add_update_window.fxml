@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
    <children>
-      <ChoiceBox fx:id="update_events" layoutX="209.0" layoutY="83.0" prefWidth="150.0" />
-      <Text layoutX="227.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an Event:" />
-      <Button layoutX="234.0" layoutY="355.0" mnemonicParsing="false" text="Add Update" />
-      <TextArea fx:id="txtfld_update_content" layoutX="184.0" layoutY="178.0" prefHeight="166.0" prefWidth="200.0" />
-      <Button layoutX="403.0" layoutY="82.0" mnemonicParsing="false" onAction="#showEventUpdates" text="Show Event's Updates" />
+      <Button layoutX="134.0" layoutY="355.0" mnemonicParsing="false" text="Add Update" />
+      <TextArea fx:id="txtfld_update_content" layoutX="184.0" layoutY="161.0" prefHeight="166.0" prefWidth="200.0" />
+      <Button layoutX="284.0" layoutY="355.0" mnemonicParsing="false" onAction="#showEventUpdates" text="Show Event's Updates" />
+      <Text layoutX="186.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add the update's Description:" />
    </children>
 </AnchorPane>
