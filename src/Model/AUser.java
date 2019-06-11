@@ -10,9 +10,9 @@ public abstract class AUser implements Observer {
     protected String password;
     protected String email;
     protected Organization userOrganization;
-    protected Enums.AccountStatus AccountStatus;
+    protected AccountStatus AccountStatus;
 
-    public AUser(String userName, String password, String email, Organization organization, accoutStatus AccountStatus){
+    public AUser(String userName, String password, String email, Organization organization,AccountStatus accoutStatus ){
         this.userOrganization = organization;
         this.userName = userName;
         this.password = password;
