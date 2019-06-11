@@ -2,17 +2,19 @@ package Controller;
 
 import Model.Model;
 import View.View;
-import javafx.fxml.FXML;
+import Model.Update;
 import Model.Category;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import Model.Update;
 import java.util.ArrayList;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -28,11 +30,11 @@ public class Controller {
     public ChoiceBox update_events;
     public TextArea txtfld_update_content;
     public TableView<Update> tblview_event_updates;
-    public TableColumn<Update, String> eventNameCol;
-    public TableColumn<Update, Integer> updateIndexCol;
-    public TableColumn<Update, String> updateContentCol;
-    public TableColumn<Update, String> publishedUserCol;
-    public TableColumn<Update, String> publishedDateCol;
+    public TableColumn<Update, String> eventName;
+    public TableColumn<Update, Integer> index;
+    public TableColumn<Update, String> description;
+    public TableColumn<Update, String> publishedBy;
+    public TableColumn<Update, String> publishedDate;
     public TableView tblview_categories;
 
     public Controller (Model model, View view) {
@@ -79,7 +81,14 @@ public class Controller {
     }
 
     public void showEventUpdates() {
-        ArrayList<Update> ans =model.showEventUpdates((int)update_events.getValue());
+        ArrayList<Update> ans = model.showEventUpdates((String)update_events.getValue());
+        eventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
+        index.setCellValueFactory(new PropertyValueFactory<>("index"));
+        description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        publishedBy.setCellValueFactory(new PropertyValueFactory<>("publishedBy"));
+        publishedDate.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+        ObservableList<Update> updateModel = FXCollections.observableArrayList(ans);
+        tblview_event_updates.setItems(updateModel);
         view.onShowEventUpdates();
     }
 
@@ -90,7 +99,7 @@ public class Controller {
     public void addEventFeedback() {
 
     }
-//public void sendFeedback(int eventID, String feedbackedUserName, int value) {
+    //public void sendFeedback(int eventID, String feedbackedUserName, int value) {
     public void sendFeedback() {
         model.sendFeedback((int)update_events.getValue(),(String)feedback_users.getValue(),(int)feedback_ranks.getValue());
         view.onSendFeedback();

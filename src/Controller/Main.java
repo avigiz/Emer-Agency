@@ -63,7 +63,7 @@ public class Main extends Application {
                 + "	status text NOT NULL\n"
                 + ");";
         String sqleventUpdates = "CREATE TABLE IF NOT EXISTS eventUpdates (\n"
-                + "	eventID integer PRIMARY KEY\n"
+                + "	eventName text PRIMARY KEY\n"
                 + "	updateID text PRIMARY KEY\n"
                 + "	publishedDate text NOT NULL\n"
                 + "	publishedUser text NOT NULL\n"

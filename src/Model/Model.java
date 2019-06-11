@@ -90,18 +90,19 @@ public class Model {
         }
     }
 
-    public ArrayList<Update> showEventUpdates(int EventID) {
+    public ArrayList<Update> showEventUpdates(String title) {
             ArrayList<Update> ans = new ArrayList<Update>();
-            String sql = "SELECT EventID"
+            String sql = "SELECT title"
                     + "FROM eventUpdates WHERE EventID = ?";
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                 // set the corresponding param
-                pstmt.setString(1, "" + EventID);
+                pstmt.setString(1, "" + title);
                 ResultSet rs = pstmt.executeQuery();
                 while ( rs.next() ) {
-                    Update currUpdate = new Update(rs.getInt("updateID"), rs.getString("publishedUser"),rs.getInt("eventID"),rs.getString("description"));
+                    Update currUpdate = new Update(rs.getInt("updateID"), rs.getString("publishedUser"),
+                            rs.getString("eventName"),rs.getString("publishedDate"), rs.getString("description"));
                     ans.add( currUpdate );
                 }
                 return ans;
