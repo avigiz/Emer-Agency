@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Model;
 import View.View;
+import javafx.fxml.FXML;
 import Model.Category;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import Model.Update;
+import java.util.ArrayList;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -76,7 +79,8 @@ public class Controller {
     }
 
     public void showEventUpdates() {
-
+        ArrayList<Update> ans =model.showEventUpdates((int)update_events.getValue());
+        view.onShowEventUpdates();
     }
 
     public void updateEvent() {
@@ -86,9 +90,10 @@ public class Controller {
     public void addEventFeedback() {
 
     }
-
+//public void sendFeedback(int eventID, String feedbackedUserName, int value) {
     public void sendFeedback() {
-
+        model.sendFeedback((int)update_events.getValue(),(String)feedback_users.getValue(),(int)feedback_ranks.getValue());
+        view.onSendFeedback();
     }
 
     public void addEventUpdate() {
