@@ -5,13 +5,13 @@ public class Update {
     private int updateId;
     private Update beforeUpdate;
     private String publishedBy;
-    private Event eventConectedTo;
+    private int eventID;
     private String description;
 
-    public Update (int updateId,Update beforeUpdate, String publishedBy,Event eventConectedTo,String description){
-        this.beforeUpdate = beforeUpdate;
+    public Update (int updateId,String publishedBy,int eventID,String description){
+//        this.beforeUpdate = beforeUpdate;
         this.description = description;
-        this.eventConectedTo = eventConectedTo;
+        this.eventID = eventID;
         this.updateId = updateId;
         this.publishedBy  = publishedBy;
     }
@@ -40,12 +40,12 @@ public class Update {
         this.publishedBy = publishedBy;
     }
 
-    public Event getEventConectedTo() {
-        return eventConectedTo;
+    public int getEventConectedTo() {
+        return eventID;
     }
 
-    public void setEventConectedTo(Event eventConectedTo) {
-        this.eventConectedTo = eventConectedTo;
+    public void setEventConectedTo(int eventID) {
+        this.eventID = eventID;
     }
 
     public String getDescription() {

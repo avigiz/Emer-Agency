@@ -37,7 +37,7 @@ public class Main extends Application {
                 + "	categoryName text PRIMARY KEY,\n"
                 + ");";
         String sqlLogin = "CREATE TABLE IF NOT EXISTS events (\n"
-                + "	eventID text PRIMARY KEY\n"
+                + "	eventID integer PRIMARY KEY\n"
                 + "	title text PRIMARY KEY\n"
                 + "	publishTime text NOT NULL\n"
                 + "	postedDispatchUser text NOT NULL\n"
@@ -55,7 +55,7 @@ public class Main extends Application {
                 + "	warnings integer NOT NULL\n"
                 + ");";
         String sqleventOrganizations = "CREATE TABLE IF NOT EXISTS eventOrganizations (\n"
-                + "	eventID text PRIMARY KEY\n"
+                + "	eventID integer PRIMARY KEY\n"
                 + "	title text PRIMARY KEY\n"
                 + "	publishDate text NOT NULL\n"
                 + "	postedDispatchUser text NOT NULL\n"
@@ -63,19 +63,20 @@ public class Main extends Application {
                 + "	status text NOT NULL\n"
                 + ");";
         String sqleventUpdates = "CREATE TABLE IF NOT EXISTS eventUpdates (\n"
-                + "	eventID text PRIMARY KEY\n"
+                + "	eventID integer PRIMARY KEY\n"
                 + "	updateID text PRIMARY KEY\n"
                 + "	publishedDate text NOT NULL\n"
                 + "	publishedUser text NOT NULL\n"
-                + "	index text NOT NULL\n"
+                + "	index integer NOT NULL\n"
+                + "	description text NOT NULL\n"
                 + ");";
         String sqlusersEvents = "CREATE TABLE IF NOT EXISTS usersEvents (\n"
-                + "	eventID text PRIMARY KEY\n"
+                + "	eventID integer PRIMARY KEY\n"
                 + "	userName text PRIMARY KEY\n"
                 + "	authorization text NOT NULL\n"
                 + ");";
         String sqleventFeedbacks = "CREATE TABLE IF NOT EXISTS eventFeedbacks (\n"
-                + "	eventID text PRIMARY KEY\n"
+                + "	eventID integer PRIMARY KEY\n"
                 + "	feedbackeduserName text PRIMARY KEY\n"
                 + "	feedbackerUserName text PRIMARY KEY\n"
                 + "	value integer NOT NULL\n"
