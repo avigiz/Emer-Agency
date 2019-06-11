@@ -2,8 +2,19 @@ package Controller;
 
 import Model.Model;
 import View.View;
+
+import Model.Category;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.control.*;
+
 import javafx.stage.Stage;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 public class Controller {
 
@@ -80,11 +91,11 @@ public class Controller {
     }
 
     public void addEventUpdate() {
-
+        String ans = model.addEventUpdate(update_events.getValue());
     }
 
-    public void showCategories() {
-
+    public void showCategories() throws SQLException {
+        List<Category> ans = model.showCategory();
     }
 
     /**
