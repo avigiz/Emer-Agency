@@ -2,10 +2,7 @@ package Controller;
 
 import Model.Model;
 import View.View;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class Controller {
@@ -19,7 +16,9 @@ public class Controller {
     public ChoiceBox feedback_ranks;
     public ChoiceBox feedback_users;
     public ChoiceBox update_events;
-    public ChoiceBox txtfld_update_content;
+    public TextArea txtfld_update_content;
+    public TableView tblview_event_updates;
+    public TableView tblview_categories;
 
     public Controller (Model model, View view) {
         this.model = model;
@@ -48,12 +47,12 @@ public class Controller {
 
     public void dispatchAdminLogOut() {
         model.setLoggedInUser("");
-        view.onLogOut((Stage)txtfld_category.getScene().getWindow());
+        view.onCloseStage((Stage)txtfld_category.getScene().getWindow());
     }
 
     public void securityForcesUserLogOut() {
         model.setLoggedInUser("");
-        view.onLogOut((Stage)btn_logout.getScene().getWindow());
+        view.onCloseStage((Stage)btn_logout.getScene().getWindow());
     }
 
     public void addCategory() {
