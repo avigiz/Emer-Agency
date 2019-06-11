@@ -12,7 +12,7 @@ public abstract class AUser implements Observer {
     protected Organization userOrganization;
     protected Enums.AccountStatus AccountStatus;
 
-    public AUser(String userName, String password, String email, Organization organization, AccountStatus AccountStatus){
+    public AUser(String userName, String password, String email, Organization organization, accoutStatus AccountStatus){
         this.userOrganization = organization;
         this.userName = userName;
         this.password = password;
