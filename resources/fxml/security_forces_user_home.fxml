@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
    <children>
+      <ChoiceBox fx:id="feedback_events" layoutX="226.0" layoutY="172.0" prefWidth="150.0" />
+      <Text layoutX="213.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choos an Event to Update:" />
       <Button fx:id="btn_logout" layoutX="31.0" layoutY="28.0" mnemonicParsing="false" onAction="#securityForcesUserLogOut" text="Log Out" />
-      <Button layoutX="235.0" layoutY="185.0" mnemonicParsing="false" onAction="#updateEvent" text="Update an Event" />
-      <Button layoutX="213.0" layoutY="270.0" mnemonicParsing="false" onAction="#addEventFeedback" text="Add an Event Feedback" />
+      <Button layoutX="388.0" layoutY="172.0" mnemonicParsing="false" onAction="#updateEvent" text="Update Event" />
+      <Button layoutX="214.0" layoutY="281.0" mnemonicParsing="false" onAction="#addEventFeedback" text="Add an Event Feedback" />
    </children>
 </AnchorPane>

@@ -2,19 +2,14 @@ package Controller;
 
 import Model.Model;
 import View.View;
-import javafx.fxml.FXML;
-
 import Model.Category;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
-
 import javafx.stage.Stage;
 import Model.Update;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,7 +17,6 @@ public class Controller {
 
     private Model model;
     private View view;
-
     public TextField txtfld_category;
     public Button btn_logout;
     public ChoiceBox feedback_events;
