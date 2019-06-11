@@ -33,58 +33,75 @@ public class Main extends Application {
     private void createAllTables() {
         // SQLite connection string
         String url = "jdbc:sqlite:resources/sqlite_db/emeragency.db";
+        String sqlCategories = "CREATE TABLE IF NOT EXISTS categories (\n"
+                + "	categoryName text PRIMARY KEY,\n"
+                + ");";
+        String sqlLogin = "CREATE TABLE IF NOT EXISTS events (\n"
+                + "	eventID text PRIMARY KEY\n"
+                + "	title text PRIMARY KEY\n"
+                + "	publishTime text NOT NULL\n"
+                + "	postedDispatchUser text NOT NULL\n"
+                + "	acount-status text NOT NULL\n"
+                + "	status text NOT NULL\n"
+                + ");";
         String sqlUsers = "CREATE TABLE IF NOT EXISTS users (\n"
-                + "	userName text PRIMARY KEY,\n"
-                + "	password text NOT NULL,\n"
-                + "	birthDate text NOT NULL,\n"
-                + "	firstName text NOT NULL,\n"
-                + "	lastName text NOT NULL,\n"
-                + "	city text NOT NULL\n"
-                + ");";
-        String sqlLogin = "CREATE TABLE IF NOT EXISTS login (\n"
                 + "	userName text PRIMARY KEY\n"
+                + "	acount-status text NOT NULL\n"
+                + "	email text NOT NULL\n"
+                + "	password text NOT NULL\n"
+                + "	role text NOT NULL\n"//admin or regular user
+                + "	organization text NOT NULL\n"
+                + "	rank integer NOT NULL\n"
+                + "	warnings integer NOT NULL\n"
                 + ");";
-        String sqlCurUser = "CREATE TABLE IF NOT EXISTS curUser (\n"
+        String sqleventOrganizations = "CREATE TABLE IF NOT EXISTS eventOrganizations (\n"
+                + "	eventID text PRIMARY KEY\n"
+                + "	title text PRIMARY KEY\n"
+                + "	publishDate text NOT NULL\n"
+                + "	postedDispatchUser text NOT NULL\n"
+                + "	acount-status text NOT NULL\n"
+                + "	status text NOT NULL\n"
+                + ");";
+        String sqleventUpdates = "CREATE TABLE IF NOT EXISTS eventOrganizations (\n"
+                + "	eventID text PRIMARY KEY\n"
+                + "	updateID text PRIMARY KEY\n"
+                + "	publishedDate text NOT NULL\n"
+                + "	publishedUser text NOT NULL\n"
+                + "	index text NOT NULL\n"
+                + ");";
+        String sqlusersEvents = "CREATE TABLE IF NOT EXISTS usersEvents (\n"
+                + "	eventID text PRIMARY KEY\n"
                 + "	userName text PRIMARY KEY\n"
+                + "	authorization text NOT NULL\n"
                 + ");";
-        String sqlVacation = "CREATE TABLE IF NOT EXISTS vacation (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	price integer NOT NULL,\n"
-                + "	airline text NOT NULL,\n"
-                + "	date_from text NOT NULL,\n"
-                + "	date_to text NOT NULL,\n"
-                + "	number_of_tickets integer NOT NULL,\n"
-                + "	destination text NOT NULL,\n"
-                + "	return_flight text NOT NULL,\n"
-                + "	type_of_tickets text NOT NULL,\n"
-                + "	baggage integer NOT NULL,\n"
-                + "	purchase_tickets text ,\n"
-                + "	connecting_flight text ,\n"
-                + "	roomRent text ,\n"
-                + "	rating integer ,\n"
-                + "	Type_of_vacation text \n"
+        String sqleventFeedbacks = "CREATE TABLE IF NOT EXISTS eventFeedbacks (\n"
+                + "	eventID text PRIMARY KEY\n"
+                + "	feedbackeduserName text PRIMARY KEY\n"
+                + "	feedbackerUserName text PRIMARY KEY\n"
+                + "	feedbackInfo text NOT NULL\n"
+                + "	value integer NOT NULL\n"
                 + ");";
-        String sqlUserVacation = "CREATE TABLE IF NOT EXISTS userVacation (\n"
-                + "	idVacation integer PRIMARY KEY,\n"
-                + "	idUser text ,\n"
-                + "FOREIGN KEY (idUser) REFERENCES users(userName)"
-                + ");";
-        String sqlPurchaseRequest = "CREATE TABLE IF NOT EXISTS userPayment (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	idVacation integer NOT NULL,\n"
-                + "	idBuyer text NOT NULL,\n"
-                + "	idSeller text NOT NULL,\n"
-                + " isPaid text NOT NULL, \n"
-                + " requestStatus text NOT NULL \n"
-                + ");";
-        String sqlTrade = "CREATE TABLE IF NOT EXISTS userTrade (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	idVacationBuyer integer NOT NULL,\n"
-                + "	idVacationSeller integer NOT NULL,\n"
-                + "	idBuyer text NOT NULL,\n"
-                + "	idSeller text NOT NULL, \n"
-                + " requestStatus text NOT NULL \n"
-                + ");";
+//        String sqlUserVacation = "CREATE TABLE IF NOT EXISTS userVacation (\n"
+//                + "	idVacation integer PRIMARY KEY,\n"
+//                + "	idUser text ,\n"
+//                + "FOREIGN KEY (idUser) REFERENCES users(userName)"
+//                + ");";
+//        String sqlPurchaseRequest = "CREATE TABLE IF NOT EXISTS userPayment (\n"
+//                + "	id integer PRIMARY KEY,\n"
+//                + "	idVacation integer NOT NULL,\n"
+//                + "	idBuyer text NOT NULL,\n"
+//                + "	idSeller text NOT NULL,\n"
+//                + " isPaid text NOT NULL, \n"
+//                + " requestStatus text NOT NULL \n"
+//                + ");";
+//        String sqlTrade = "CREATE TABLE IF NOT EXISTS userTrade (\n"
+//                + "	id integer PRIMARY KEY,\n"
+//                + "	idVacationBuyer integer NOT NULL,\n"
+//                + "	idVacationSeller integer NOT NULL,\n"
+//                + "	idBuyer text NOT NULL,\n"
+//                + "	idSeller text NOT NULL, \n"
+//                + " requestStatus text NOT NULL \n"
+//                + ");";
 
 
         try (Connection conn = DriverManager.getConnection(url);
@@ -92,11 +109,11 @@ public class Main extends Application {
             // create a new table
             stmt.execute(sqlUsers);
             stmt.execute(sqlLogin);
-            stmt.execute(sqlCurUser);
-            stmt.execute(sqlVacation);
-            stmt.execute(sqlUserVacation);
-            stmt.execute(sqlPurchaseRequest);
-            stmt.execute(sqlTrade);
+            stmt.execute(sqlCategories);
+            stmt.execute(sqleventOrganizations);
+            stmt.execute(sqleventUpdates);
+            stmt.execute(sqlusersEvents);
+            stmt.execute(sqleventFeedbacks);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
