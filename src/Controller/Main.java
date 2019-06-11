@@ -62,7 +62,7 @@ public class Main extends Application {
                 + "	acount-status text NOT NULL\n"
                 + "	status text NOT NULL\n"
                 + ");";
-        String sqleventUpdates = "CREATE TABLE IF NOT EXISTS eventOrganizations (\n"
+        String sqleventUpdates = "CREATE TABLE IF NOT EXISTS eventUpdates (\n"
                 + "	eventID text PRIMARY KEY\n"
                 + "	updateID text PRIMARY KEY\n"
                 + "	publishedDate text NOT NULL\n"
@@ -78,7 +78,6 @@ public class Main extends Application {
                 + "	eventID text PRIMARY KEY\n"
                 + "	feedbackeduserName text PRIMARY KEY\n"
                 + "	feedbackerUserName text PRIMARY KEY\n"
-                + "	feedbackInfo text NOT NULL\n"
                 + "	value integer NOT NULL\n"
                 + ");";
 //        String sqlUserVacation = "CREATE TABLE IF NOT EXISTS userVacation (\n"

@@ -2,9 +2,9 @@ package Controller;
 
 import Model.Model;
 import View.View;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,48 +15,77 @@ public class Controller {
 
     public TextField txtfld_category;
     public Button btn_logout;
+    public ChoiceBox feedback_events;
+    public ChoiceBox feedback_ranks;
+    public ChoiceBox feedback_users;
+    public ChoiceBox update_events;
+    public ChoiceBox txtfld_update_content;
 
     public Controller (Model model, View view) {
         this.model = model;
         this.view = view;
     }
 
-    public void dispatchAdminLogin(ActionEvent e) {
+    public void dispatchAdminLogin() {
         model.setLoggedInUser("dispatch_admin");
         view.onDispatchAdminLogin();
     }
 
-    public void officerLogin(ActionEvent e) {
+    public void officerLogin() {
         model.setLoggedInUser("officer");
         view.onSecurityForcesUserLogin("Officer");
     }
 
-    public void fireFighterLogin(ActionEvent e) {
+    public void fireFighterLogin() {
         model.setLoggedInUser("firefighter");
         view.onSecurityForcesUserLogin("Firefighter");
     }
 
-    public void medicLogin(ActionEvent e) {
+    public void medicLogin() {
         model.setLoggedInUser("medic");
         view.onSecurityForcesUserLogin("Medic");
     }
 
-    public void dispatchAdminLogOut(ActionEvent e) {
+    public void dispatchAdminLogOut() {
         model.setLoggedInUser("");
         view.onLogOut((Stage)txtfld_category.getScene().getWindow());
     }
 
-    public void securityForcesUserLogOut(ActionEvent e) {
+    public void securityForcesUserLogOut() {
         model.setLoggedInUser("");
         view.onLogOut((Stage)btn_logout.getScene().getWindow());
     }
 
-    public void addCategory(ActionEvent e) {
+    public void addCategory() {
         boolean result = model.addCategory(txtfld_category.getText());
         if (result)
             handleAlert("s_category");
         else
             handleAlert("f_category");
+    }
+
+    public void showEventUpdates() {
+
+    }
+
+    public void updateEvent() {
+
+    }
+
+    public void addEventFeedback() {
+
+    }
+
+    public void sendFeedback() {
+
+    }
+
+    public void addEventUpdate() {
+
+    }
+
+    public void showCategories() {
+
     }
 
     /**

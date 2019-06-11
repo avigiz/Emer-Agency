@@ -16,5 +16,6 @@
       <Button layoutX="331.0" layoutY="188.0" mnemonicParsing="false" onAction="#officerLogin" text="Login as an Officer" />
       <Button layoutX="103.0" layoutY="266.0" mnemonicParsing="false" onAction="#fireFighterLogin" text="Login as a Firefighter" />
       <Button layoutX="337.0" layoutY="266.0" mnemonicParsing="false" onAction="#medicLogin" text="Login as a Medic" />
+      <Button layoutX="221.0" layoutY="336.0" mnemonicParsing="false" onAction="#fireFighterLogin" text="Show Categories" />
    </children>
 </AnchorPane>
