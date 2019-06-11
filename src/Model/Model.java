@@ -168,13 +168,4 @@ public class Model {
                 System.out.println(e.getMessage());
             }
     }
-
-    public void addEventUpdate() {
-
-    }
-
-    public void showCategories() {
-
-    }
-
 }

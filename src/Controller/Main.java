@@ -36,7 +36,7 @@ public class Main extends Application {
         String sqlCategories = "CREATE TABLE IF NOT EXISTS categories (\n"
                 + "	categoryName text PRIMARY KEY,\n"
                 + ");";
-        String sqlLogin = "CREATE TABLE IF NOT EXISTS events (\n"
+        String sqlEvents = "CREATE TABLE IF NOT EXISTS events (\n"
                 + "	eventID integer PRIMARY KEY\n"
                 + "	title text PRIMARY KEY\n"
                 + "	publishTime text NOT NULL\n"
@@ -83,34 +83,13 @@ public class Main extends Application {
                 + "	feedbackerUserName text PRIMARY KEY\n"
                 + "	value integer NOT NULL\n"
                 + ");";
-//        String sqlUserVacation = "CREATE TABLE IF NOT EXISTS userVacation (\n"
-//                + "	idVacation integer PRIMARY KEY,\n"
-//                + "	idUser text ,\n"
-//                + "FOREIGN KEY (idUser) REFERENCES users(userName)"
-//                + ");";
-//        String sqlPurchaseRequest = "CREATE TABLE IF NOT EXISTS userPayment (\n"
-//                + "	id integer PRIMARY KEY,\n"
-//                + "	idVacation integer NOT NULL,\n"
-//                + "	idBuyer text NOT NULL,\n"
-//                + "	idSeller text NOT NULL,\n"
-//                + " isPaid text NOT NULL, \n"
-//                + " requestStatus text NOT NULL \n"
-//                + ");";
-//        String sqlTrade = "CREATE TABLE IF NOT EXISTS userTrade (\n"
-//                + "	id integer PRIMARY KEY,\n"
-//                + "	idVacationBuyer integer NOT NULL,\n"
-//                + "	idVacationSeller integer NOT NULL,\n"
-//                + "	idBuyer text NOT NULL,\n"
-//                + "	idSeller text NOT NULL, \n"
-//                + " requestStatus text NOT NULL \n"
-//                + ");";
 
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
             // create a new table
             stmt.execute(sqlUsers);
-            stmt.execute(sqlLogin);
+            stmt.execute(sqlEvents);
             stmt.execute(sqlCategories);
             stmt.execute(sqleventOrganizations);
             stmt.execute(sqleventUpdates);
@@ -119,5 +98,6 @@ public class Main extends Application {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
