@@ -20,7 +20,6 @@ public class Controller {
 
     private Model model;
     private View view;
-
     public TextField txtfld_category;
     public Button btn_logout;
     public ChoiceBox feedback_events;
