@@ -13,17 +13,17 @@ public class Event extends Observable {
     private int eventID;
     private String title;
     private String publishedTime;
-    private AUser postedDispatchUser;
+    private String userName;
     private TreeMap<Integer,Update> updates;
     private Enums.EventStatus EventStatus;
     private List<Category> categories;
 
 
-    public Event(int eventID, String title, String publishedTime, AUser postedDispatchUser, TreeMap<Integer,Update> updates, EventStatus EventStatus, List<Category> categories){
+    public Event(int eventID, String title, String publishedTime, String userName, TreeMap<Integer,Update> updates, EventStatus EventStatus, List<Category> categories){
         this.categories = categories;
         this.eventID = eventID;
         this.EventStatus = EventStatus;
-        this.postedDispatchUser = postedDispatchUser;
+        this.userName = userName;
         this.publishedTime = publishedTime;
         this.title = title;
         this.updates = updates;

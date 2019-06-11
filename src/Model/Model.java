@@ -109,8 +109,36 @@ public class Model {
                 e.printStackTrace();
             }
             return null;
-        }
+    }
 
+
+//    String sqlusersEvents = "CREATE TABLE IF NOT EXISTS usersEvents (\n"
+//            + "	eventID integer PRIMARY KEY\n"
+//            + "	userName text PRIMARY KEY\n"
+//            + "	authorization text NOT NULL\n"
+//            + "	title text NOT NULL\n"
+//            + ");";
+//public Event(int eventID, String title, String publishedTime, String userName, TreeMap<Integer,Update> updates, EventStatus EventStatus, List<Category> categories){
+    //return all the events of the current user.
+    public ArrayList<String> getUserEvent(){
+        ArrayList<String> ans = new ArrayList<String>();
+        String sql = "SELECT title"
+                + "FROM usersEvents WHERE userName = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setString(1, curr_connected_username);
+            ResultSet rs = pstmt.executeQuery();
+            while ( rs.next() ) {
+                ans.add( rs.getString("title") );
+            }
+            return ans;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
     public void updateEvent() {
