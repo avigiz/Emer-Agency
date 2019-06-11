@@ -2,14 +2,19 @@ package Controller;
 
 import Model.Model;
 import View.View;
+import javafx.fxml.FXML;
+import Model.Category;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import Model.Update;
-
 import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 public class Controller {
 
@@ -22,7 +27,14 @@ public class Controller {
     public ChoiceBox feedback_ranks;
     public ChoiceBox feedback_users;
     public ChoiceBox update_events;
-    public ChoiceBox txtfld_update_content;
+    public TextArea txtfld_update_content;
+    public TableView<Update> tblview_event_updates;
+    public TableColumn<Update, String> eventNameCol;
+    public TableColumn<Update, Integer> updateIndexCol;
+    public TableColumn<Update, String> updateContentCol;
+    public TableColumn<Update, String> publishedUserCol;
+    public TableColumn<Update, String> publishedDateCol;
+    public TableView tblview_categories;
 
     public Controller (Model model, View view) {
         this.model = model;
@@ -51,12 +63,12 @@ public class Controller {
 
     public void dispatchAdminLogOut() {
         model.setLoggedInUser("");
-        view.onLogOut((Stage)txtfld_category.getScene().getWindow());
+        view.onCloseStage((Stage)txtfld_category.getScene().getWindow());
     }
 
     public void securityForcesUserLogOut() {
         model.setLoggedInUser("");
-        view.onLogOut((Stage)btn_logout.getScene().getWindow());
+        view.onCloseStage((Stage)btn_logout.getScene().getWindow());
     }
 
     public void addCategory() {
@@ -86,11 +98,11 @@ public class Controller {
     }
 
     public void addEventUpdate() {
-
+        String ans = model.addEventUpdate(update_events.getValue());
     }
 
-    public void showCategories() {
-
+    public void showCategories() throws SQLException {
+        List<Category> ans = model.showCategory();
     }
 
     /**

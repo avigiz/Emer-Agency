@@ -5,9 +5,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
    <children>
-      <Button layoutX="222.0" layoutY="169.0" mnemonicParsing="false" onAction="#showEventUpdates" text="Show Event Updates" />
       <Button fx:id="btn_logout" layoutX="31.0" layoutY="28.0" mnemonicParsing="false" onAction="#securityForcesUserLogOut" text="Log Out" />
-      <Button layoutX="235.0" layoutY="220.0" mnemonicParsing="false" onAction="#updateEvent" text="Update an Event" />
-      <Button layoutX="213.0" layoutY="270.0" mnemonicParsing="false" onAction="#eventFeedback" text="Add an Event Feedback" />
+      <Button layoutX="235.0" layoutY="185.0" mnemonicParsing="false" onAction="#updateEvent" text="Update an Event" />
+      <Button layoutX="213.0" layoutY="270.0" mnemonicParsing="false" onAction="#addEventFeedback" text="Add an Event Feedback" />
    </children>
 </AnchorPane>

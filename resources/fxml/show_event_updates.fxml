@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+   <children>
+      <TableView fx:id="tblview_event_updates" layoutY="1.0" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="eventNameCol" prefWidth="111.0" text="Event Name" />
+          <TableColumn fx:id="updateIndexCol" prefWidth="116.0" text="Update Index" />
+            <TableColumn fx:id="updateContentCol" prefWidth="125.0" text="Update Content" />
+            <TableColumn fx:id="publishedUserCol" prefWidth="125.0" text="Published User" />
+            <TableColumn fx:id="publishedDateCol" prefWidth="125.0" text="Published Date" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
