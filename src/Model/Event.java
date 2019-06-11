@@ -1,24 +1,28 @@
 package Model;
 
+import Enums.EventStatus;
+
 import java.util.List;
-import java.util.Locale;
+import java.util.Observable;
 import java.util.TreeMap;
 
-public class Event {
+// TODO : AFTER EACH CHANGE - setChanged(); notifyAll();
+
+public class Event extends Observable {
 
     private int eventID;
     private String title;
     private String publishedTime;
     private AUser postedDispatchUser;
     private TreeMap<Integer,Update> updates;
-    private eventStatus eventStatus;
+    private Enums.EventStatus EventStatus;
     private List<Category> categories;
 
 
-    public Event(int eventID,String title,String publishedTime, AUser postedDispatchUser,TreeMap<Integer,Update> updates,eventStatus eventStatus,List<Category> categories){
+    public Event(int eventID, String title, String publishedTime, AUser postedDispatchUser, TreeMap<Integer,Update> updates, EventStatus EventStatus, List<Category> categories){
         this.categories = categories;
         this.eventID = eventID;
-        this.eventStatus = eventStatus;
+        this.EventStatus = EventStatus;
         this.postedDispatchUser = postedDispatchUser;
         this.publishedTime = publishedTime;
         this.title = title;
@@ -65,12 +69,12 @@ public class Event {
         this.updates = updates;
     }
 
-    public Model.eventStatus getEventStatus() {
-        return eventStatus;
+    public EventStatus getEventStatus() {
+        return EventStatus;
     }
 
-    public void setEventStatus(Model.eventStatus eventStatus) {
-        this.eventStatus = eventStatus;
+    public void setEventStatus(EventStatus eventStatus) {
+        this.EventStatus = eventStatus;
     }
 
     public List<Category> getCategories() {

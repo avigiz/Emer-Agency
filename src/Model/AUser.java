@@ -1,19 +1,23 @@
 package Model;
 
-public abstract class AUser {
+import Enums.AccountStatus;
+
+import java.util.Observer;
+
+public abstract class AUser implements Observer {
 
     protected String userName;
     protected String password;
     protected String email;
     protected Organization userOrganization;
-    protected accoutStatus accoutStatus;
+    protected Enums.AccountStatus AccountStatus;
 
-    public AUser(String userName,String password,String email,Organization organization,accoutStatus accoutStatus){
+    public AUser(String userName, String password, String email, Organization organization, AccountStatus AccountStatus){
         this.userOrganization = organization;
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.accoutStatus = accoutStatus;
+        this.AccountStatus = AccountStatus;
     }
 
     public String getUserName() {
@@ -48,11 +52,15 @@ public abstract class AUser {
         this.userOrganization = userOrganization;
     }
 
-    public Model.accoutStatus getAccoutStatus() {
-        return accoutStatus;
+    public AccountStatus getAccountStatus() {
+        return AccountStatus;
     }
 
-    public void setAccoutStatus(Model.accoutStatus accoutStatus) {
-        this.accoutStatus = accoutStatus;
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.AccountStatus = accountStatus;
+    }
+
+    public void update(Observer o, Object arg) {
+        // TODO : ADD UPDATE IMPLEMENTATION
     }
 }
