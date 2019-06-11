@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Model;
 import View.View;
+import javafx.fxml.FXML;
 
 import Model.Category;
 import javafx.scene.control.Alert;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 
 import javafx.stage.Stage;
+import Model.Update;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +30,12 @@ public class Controller {
     public ChoiceBox feedback_users;
     public ChoiceBox update_events;
     public TextArea txtfld_update_content;
-    public TableView tblview_event_updates;
+    public TableView<Update> tblview_event_updates;
+    public TableColumn<Update, String> eventNameCol;
+    public TableColumn<Update, Integer> updateIndexCol;
+    public TableColumn<Update, String> updateContentCol;
+    public TableColumn<Update, String> publishedUserCol;
+    public TableColumn<Update, String> publishedDateCol;
     public TableView tblview_categories;
 
     public Controller (Model model, View view) {
