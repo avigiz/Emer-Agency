@@ -1,8 +1,12 @@
 package Model;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import View.View;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,6 +44,7 @@ public class Model {
         // TODO : CHECK IF CATEGORY ALREADY EXISTS, AND ADD IT IF NOT
         return false;
     }
+
 
     public List<Category> showCategory() throws SQLException {
         String sql = "SELECT * FROM categories";
@@ -84,4 +89,48 @@ public class Model {
             return "notOK";
         }
     }
+
+    public ArrayList<Update> showEventUpdates(int EventID) {
+            ArrayList<Update> ans = new ArrayList<Update>();
+            String sql = "SELECT EventID"
+                    + "FROM eventUpdates WHERE EventID = ?";
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                // set the corresponding param
+                pstmt.setString(1, "" + EventID);
+                ResultSet rs = pstmt.executeQuery();
+                while ( rs.next() ) {
+                    Update currUpdate = new Update(rs.getInt("updateID"), rs.getString("publishedUser"),rs.getInt("eventID"),rs.getString("description"));
+                    ans.add( currUpdate );
+                }
+                return ans;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+
+    public void updateEvent() {
+
+    }
+
+    public void addEventFeedback() {
+
+    }
+
+    public void sendFeedback() {
+
+    }
+
+    public void addEventUpdate() {
+
+    }
+
+    public void showCategories() {
+
+    }
+
 }
