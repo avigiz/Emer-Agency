@@ -4,14 +4,11 @@ import Model.Model;
 import View.View;
 import Model.Update;
 import Model.Category;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +43,7 @@ public class Controller {
      * opens the dispatch admin's homme screen
      */
     public void dispatchAdminLogin() {
-        model.setLoggedInUser("dispatch_admin");
+        model.setLoggedInUser("shalev");
         view.onDispatchAdminLogin();
     }
 
@@ -54,7 +51,7 @@ public class Controller {
      * opens the officer's home screen
      */
     public void officerLogin() {
-        model.setLoggedInUser("officer");
+        model.setLoggedInUser("idan");
         ArrayList<String> events = model.getUserEvents();
         view.onSecurityForcesUserLogin("Officer", events);
     }
@@ -63,7 +60,7 @@ public class Controller {
      * opens the firefighter's home screen
      */
     public void fireFighterLogin() {
-        model.setLoggedInUser("firefighter");
+        model.setLoggedInUser("avi");
         ArrayList<String> events = model.getUserEvents();
         view.onSecurityForcesUserLogin("Firefighter", events);
     }
@@ -72,7 +69,7 @@ public class Controller {
      * opens the medic's home screen
      */
     public void medicLogin() {
-        model.setLoggedInUser("medic");
+        model.setLoggedInUser("niv");
         ArrayList<String> events = model.getUserEvents();
         view.onSecurityForcesUserLogin("Medic", events);
     }
