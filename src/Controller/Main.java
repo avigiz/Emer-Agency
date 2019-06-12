@@ -20,7 +20,7 @@ public class Main extends Application {
         View view = new View();
         controller = new Controller(model, view);
         createAllTables();
-        //addTODB();
+        addTODB();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         loader.setController(controller);
         Parent root = loader.load();
@@ -75,7 +75,7 @@ public class Main extends Application {
                 + "	updateID text,\n"
                 + "	publishedDate text NOT NULL,\n"
                 + "	publishedUser text NOT NULL,\n"
-                + "	index1 integer NOT NULL,\n"
+                + "	ordering integer NOT NULL,\n"
                 + "	description text NOT NULL,\n"
                 + "PRIMARY KEY (eventName,updateID)\n"
                 + ");";

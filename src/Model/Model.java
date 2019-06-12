@@ -78,9 +78,9 @@ public class Model {
      * @param eventName - a given event's name
      * @return - "ok" if addition is successful. else - "notOk"
      */
-    public String addEventUpdate(String eventName) {
-        String insertSQL1 = "INSERT INTO eventUpdates (eventID,updateID,publishedDate,publishedUser,index)"
-                +   " VALUES(?,?,?,?,?)";
+    public String addEventUpdate(String eventName, String updateContent) {
+        String insertSQL1 = "INSERT INTO eventUpdates (eventID,updateID,publishedDate,publishedUser,ordering,description)"
+                +   " VALUES(?,?,?,?,?,?)";
         String selectSQL1 = "SELECT * FROM eventUpdates WHERE eventID = ?";
         try (Connection conn = this.connect();
              PreparedStatement insert1 = conn.prepareStatement(insertSQL1);
@@ -92,6 +92,7 @@ public class Model {
             insert1.setString(3,Calendar.getInstance().toString());
             insert1.setString(4,curr_connected_username);
             insert1.setInt(5,selectSQL1.length()+1);
+            insert1.setString(6,updateContent);
             return "ok";
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -106,18 +107,18 @@ public class Model {
      */
     public ArrayList<Update> showEventUpdates(String title) {
             ArrayList<Update> ans = new ArrayList<Update>();
-            String sql = "SELECT title"
-                    + " FROM eventUpdates WHERE EventID = ?";
+            String sql = "SELECT *"
+                    + " FROM eventUpdates WHERE eventName = ?";
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                 // set the corresponding param
-                pstmt.setString(1, "" + title);
+                pstmt.setString(1, title);
                 ResultSet rs = pstmt.executeQuery();
                 while ( rs.next() ) {
                     Update currUpdate = new Update(rs.getInt("updateID"), rs.getString("publishedUser"),
                             rs.getString("eventName"), rs.getString("description"),
-                            rs.getString("publishedDate"), rs.getInt("index"));
+                            rs.getString("publishedDate"), rs.getInt("ordering"));
                     ans.add( currUpdate );
                 }
                 return ans;
