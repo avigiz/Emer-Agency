@@ -1,12 +1,8 @@
 package Model;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-import View.View;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -45,6 +41,10 @@ public class Model {
         return false;
     }
 
+    /**
+     * gets all the available categories from the database
+     * @return - a list containing all the categories
+     */
     public List<Category> showCategory() {
         String sql = "SELECT * FROM categories";
         ResultSet m_results;
@@ -66,22 +66,25 @@ public class Model {
         }
     }
 
-
-    public String addEventUpdate(Object value) {
+    /**
+     * adds a new update to the databse
+     * @param eventName - a given event's name
+     * @return - "ok" if addition is successful. else - "notOk"
+     */
+    public String addEventUpdate(String eventName) {
         String insertSQL1 = "INSERT INTO eventUpdates (eventID,updateID,publishedDate,publishedUser,index)"
                 +   " VALUES(?,?,?,?,?)";
         String selectSQL1 = "SELECT * FROM eventUpdates WHERE eventID = ?";
-        String eventName = (String)value;
         try (Connection conn = this.connect();
-             PreparedStatement insrert1 = conn.prepareStatement(insertSQL1);
+             PreparedStatement insert1 = conn.prepareStatement(insertSQL1);
             ) {
-            insrert1.setString(1,eventName);
+            insert1.setString(1,eventName);
             Random rnd = new Random();
             Integer random = rnd.nextInt(100);
-            insrert1.setString(2,random.toString());
-            insrert1.setString(3,Calendar.getInstance().toString());
-            insrert1.setString(4,curr_connected_username);
-            insrert1.setInt(5,selectSQL1.length()+1);
+            insert1.setString(2,random.toString());
+            insert1.setString(3,Calendar.getInstance().toString());
+            insert1.setString(4,curr_connected_username);
+            insert1.setInt(5,selectSQL1.length()+1);
             return "ok";
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -89,6 +92,11 @@ public class Model {
         }
     }
 
+    /**
+     * gets all the updates of a given event
+     * @param title - a given event's title
+     * @return - an arraylist with all the updates
+     */
     public ArrayList<Update> showEventUpdates(String title) {
             ArrayList<Update> ans = new ArrayList<Update>();
             String sql = "SELECT title"
@@ -112,16 +120,11 @@ public class Model {
             return null;
     }
 
-
-//    String sqlusersEvents = "CREATE TABLE IF NOT EXISTS usersEvents (\n"
-//            + "	eventID integer PRIMARY KEY\n"
-//            + "	userName text PRIMARY KEY\n"
-//            + "	authorization text NOT NULL\n"
-//            + "	title text NOT NULL\n"
-//            + ");";
-//public Event(int eventID, String title, String publishedTime, String userName, TreeMap<Integer,Update> updates, EventStatus EventStatus, List<Category> categories){
-    //return all the events of the current user.
-    public ArrayList<String> getUserEvent(){
+    /**
+     * gets all the event titles connected to the connected user
+     * @return - all the event titles connected to the connected user
+     */
+    public ArrayList<String> getUserEvents(){
         ArrayList<String> ans = new ArrayList<String>();
         String sql = "SELECT title"
                 + "FROM usersEvents WHERE userName = ?";
@@ -141,16 +144,39 @@ public class Model {
         return null;
     }
 
+    /**
+     * gets all the user names connected to the same given event as the connected user
+     * @return - all the user names connected to the same given event as the connected user
+     */
+    public ArrayList<String> getEventsUsers(String eventName){
+        ArrayList<String> ans = new ArrayList<String>();
+        String sql = "SELECT userName"
+                + "FROM usersEvents WHERE eventName = ? and userName != ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-    public void updateEvent() {
-
+            // set the corresponding param
+            pstmt.setString(1, eventName);
+            pstmt.setString(2, curr_connected_username);
+            ResultSet rs = pstmt.executeQuery();
+            while ( rs.next() ) {
+                ans.add( rs.getString("userName") );
+            }
+            return ans;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public void addEventFeedback() {
-
-    }
-
-    public void sendFeedback(int eventID, String feedbackedUserName, int value) {
+    /**
+     * adds a new feedback to the database
+     * @param eventID - a given event's id
+     * @param feedbackedUserName - a given user name to be feedbacked
+     * @param value - a given feedback value
+     * @return - true if addition is successful. else - false
+     */
+    public boolean sendFeedback(int eventID, String feedbackedUserName, int value) {
 
             String sql = "INSERT INTO eventFeedbacks(eventID, feedbackeduserName, feedbackerUserName, value) VALUES(?,?,?,?,?,?)";
 
@@ -163,9 +189,11 @@ public class Model {
 
                 //execute query
                 pstmt.executeUpdate();
+                return true;
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
+                return false;
             }
     }
 }
