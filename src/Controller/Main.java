@@ -24,7 +24,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         loader.setController(controller);
         Parent root = loader.load();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("911 What's Your Emergency?");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
