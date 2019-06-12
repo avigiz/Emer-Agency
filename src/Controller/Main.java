@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Model;
+import View.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,13 +12,20 @@ import java.sql.*;
 
 public class Main extends Application {
 
+    static public Controller controller;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Model model = new Model();
+        View view = new View();
+        controller = new Controller(model, view);
         createAllTables();
         addTODB();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        loader.setController(controller);
+        Parent root = loader.load();
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
 

@@ -178,7 +178,7 @@ public class Controller {
         categoryName.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         ObservableList<Category> categoryModel = FXCollections.observableArrayList(ans);
         tblview_categories.setItems(categoryModel);
-        view.onShowEventUpdates();
+        view.onShowCategories();
     }
 
     /**
