@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ public class View {
      * displays the dispatch admin home screen
      */
     public void onDispatchAdminLogin() {
-        createNewWindow("Hello Dispatch Admin", "dispatch_admin.fxml");
+        createNewWindow("Hello Dispatch Admin", "dispatch_admin_home.fxml");
     }
 
     /**
@@ -76,8 +77,9 @@ public class View {
         try {
             Stage stage = new Stage();
             stage.setTitle(title);
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("../../resources/fxml/" + fxmlPath));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlPath));
+            loader.setController(Main.controller);
+            Parent root = loader.load();
             Scene scene = new Scene(root, 600, 400);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
