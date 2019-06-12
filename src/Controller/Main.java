@@ -142,6 +142,10 @@ public class Main extends Application {
         String sq10 = "INSERT INTO usersEvents(eventName, userName, authorization, title)" +
                 " VALUES(?,?,?,?)";
 
+        //add category
+        String sq11 = "INSERT INTO categories(categoryName)" +
+                " VALUES(?)";
+
         try (Connection conn = this.connect2();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              PreparedStatement pstmt2 = conn.prepareStatement(sq2);
@@ -152,7 +156,8 @@ public class Main extends Application {
              PreparedStatement pstmt7 = conn.prepareStatement(sq7);
              PreparedStatement pstmt8 = conn.prepareStatement(sq8);
              PreparedStatement pstmt9 = conn.prepareStatement(sq9);
-             PreparedStatement pstmt10 = conn.prepareStatement(sq10)
+             PreparedStatement pstmt10 = conn.prepareStatement(sq10);
+             PreparedStatement pstmt11 = conn.prepareStatement(sq11)
         ) {
             //event1
             pstmt.setInt(1, 1);
@@ -234,6 +239,9 @@ public class Main extends Application {
             pstmt10.setString(3, "write");
             pstmt10.setString(4, "stabbing");
 
+            //addCategory
+            pstmt11.setString(1,"crime");
+
             //execute query
             pstmt.executeUpdate();
             pstmt2.executeUpdate();
@@ -245,6 +253,7 @@ public class Main extends Application {
             pstmt8.executeUpdate();
             pstmt9.executeUpdate();
             pstmt10.executeUpdate();
+            pstmt11.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

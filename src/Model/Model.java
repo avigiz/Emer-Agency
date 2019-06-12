@@ -51,10 +51,10 @@ public class Model {
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            m_results = pstmt.executeQuery(sql);
+            m_results = pstmt.executeQuery();
             List<Category> ans = new ArrayList<>();
-            int i = 0;
-            while (i < m_results.getFetchSize()){
+            int i = 1;
+            while (m_results.next()){
                 String tmp =(m_results.getString(i));
                 ans.add(new Category(tmp));
                 i++;
