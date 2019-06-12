@@ -196,4 +196,31 @@ public class Model {
                 return false;
             }
     }
+
+
+    String sqlEvents = "CREATE TABLE IF NOT EXISTS events (\n"
+            + "	eventID integer PRIMARY KEY\n"
+            + "	title text PRIMARY KEY\n"
+            + "	publishTime text NOT NULL\n"
+            + "	postedDispatchUser text NOT NULL\n"
+            + "	acount-status text NOT NULL\n"
+            + "	status text NOT NULL\n"
+            + ");";
+    String sqlUsers = "CREATE TABLE IF NOT EXISTS users (\n"
+            + "	userName text PRIMARY KEY\n"
+            + "	acount-status text NOT NULL\n"
+            + "	email text NOT NULL\n"
+            + "	password text NOT NULL\n"
+            + "	role text NOT NULL\n"//admin or regular user
+            + "	organization text NOT NULL\n"
+            + "	rank integer NOT NULL\n"
+            + "	warnings integer NOT NULL\n"
+            + ");";
+    String sqlusersEvents = "CREATE TABLE IF NOT EXISTS usersEvents (\n"
+            + "	eventID integer PRIMARY KEY\n"
+            + "	userName text PRIMARY KEY\n"
+            + "	authorization text NOT NULL\n"
+            + "	title text NOT NULL\n"
+            + ");";
+
 }
