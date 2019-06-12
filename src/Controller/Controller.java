@@ -55,8 +55,8 @@ public class Controller {
      */
     public void officerLogin() {
         model.setLoggedInUser("officer");
-        getHomeScreenEvents();
-        view.onSecurityForcesUserLogin("Officer");
+        ArrayList<String> events = model.getUserEvents();
+        view.onSecurityForcesUserLogin("Officer", events);
     }
 
     /**
@@ -64,8 +64,8 @@ public class Controller {
      */
     public void fireFighterLogin() {
         model.setLoggedInUser("firefighter");
-        getHomeScreenEvents();
-        view.onSecurityForcesUserLogin("Firefighter");
+        ArrayList<String> events = model.getUserEvents();
+        view.onSecurityForcesUserLogin("Firefighter", events);
     }
 
     /**
@@ -73,8 +73,8 @@ public class Controller {
      */
     public void medicLogin() {
         model.setLoggedInUser("medic");
-        getHomeScreenEvents();
-        view.onSecurityForcesUserLogin("Medic");
+        ArrayList<String> events = model.getUserEvents();
+        view.onSecurityForcesUserLogin("Medic", events);
     }
 
     /**
@@ -108,15 +108,8 @@ public class Controller {
      * opens a new window with all the updates of all the events the user is a part of
      */
     public void showEventUpdates() {
-        ArrayList<Update> ans = model.showEventUpdates((String)update_events.getValue());
-        eventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        index.setCellValueFactory(new PropertyValueFactory<>("index"));
-        description.setCellValueFactory(new PropertyValueFactory<>("description"));
-        publishedBy.setCellValueFactory(new PropertyValueFactory<>("publishedBy"));
-        publishedDate.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
-        ObservableList<Update> updateModel = FXCollections.observableArrayList(ans);
-        tblview_event_updates.setItems(updateModel);
-        view.onShowEventUpdates();
+        ArrayList<Update> updates = model.showEventUpdates((String)update_events.getValue());
+        view.onShowEventUpdates(updates);
     }
 
     /**
@@ -134,9 +127,7 @@ public class Controller {
             handleAlert("no_feedback_event");
         else {
             ArrayList<String> users = model.getEventsUsers(feedback_events.valueProperty().getName());
-            ObservableList<String> list = FXCollections.observableArrayList(users);
-            feedback_users.setItems(list);
-            view.onAddEventFeedback();
+            view.onAddEventFeedback(users);
         }
     }
 
@@ -147,12 +138,15 @@ public class Controller {
         boolean result = model.sendFeedback((int)feedback_events.getValue(),(String)feedback_users.getValue(),(int)feedback_ranks.getValue());
         if (result) {
             handleAlert("s_feedback");
+            feedback_ranks.valueProperty().set(null);
+            feedback_users.valueProperty().set(null);
             view.onCloseStage((Stage)feedback_users.getScene().getWindow());
         }
-        else
+        else {
             handleAlert("f_feedback");
-        feedback_ranks.valueProperty().set(null);
-        feedback_users.valueProperty().set(null);
+            feedback_ranks.valueProperty().set(null);
+            feedback_users.valueProperty().set(null);
+        }
     }
 
     /**
@@ -162,12 +156,15 @@ public class Controller {
         String ans = model.addEventUpdate(update_events.valueProperty().getName());
         if (ans.equals("ok")) {
             handleAlert("s_update");
+            txtarea_update_content.setText("");
+            update_events.valueProperty().set(null);
             view.onCloseStage((Stage)update_events.getScene().getWindow());
         }
-        else
+        else {
             handleAlert("f_update");
-        txtarea_update_content.setText("");
-        update_events.valueProperty().set(null);
+            txtarea_update_content.setText("");
+            update_events.valueProperty().set(null);
+        }
     }
 
     /**
@@ -175,10 +172,7 @@ public class Controller {
      */
     public void showCategories() {
         List<Category> ans = model.showCategory();
-        categoryName.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
-        ObservableList<Category> categoryModel = FXCollections.observableArrayList(ans);
-        tblview_categories.setItems(categoryModel);
-        view.onShowCategories();
+        view.onShowCategories(ans);
     }
 
     /**
@@ -207,15 +201,6 @@ public class Controller {
         if(s.equals("f_feedback")) {
             createAlert("We have a problem..", "Failed to add a new feedback", Alert.AlertType.ERROR);
         }
-    }
-
-    /**
-     * sets the possible events in the choice box in the user's home screen
-     */
-    private void getHomeScreenEvents() {
-        ArrayList<String> events = model.getUserEvents();
-        ObservableList<String> list = FXCollections.observableArrayList(events);
-        feedback_events.setItems(list);
     }
 
     /**

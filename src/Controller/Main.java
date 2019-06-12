@@ -20,7 +20,7 @@ public class Main extends Application {
         View view = new View();
         controller = new Controller(model, view);
         createAllTables();
-        addTODB();
+        //addTODB();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         loader.setController(controller);
         Parent root = loader.load();
