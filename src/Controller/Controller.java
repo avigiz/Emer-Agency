@@ -106,7 +106,7 @@ public class Controller {
      */
     public void showEventUpdates() {
         if (update_events.getValue() == null)
-            handleAlert("no_update_event");
+            handleAlert("no_update_event_for_show");
         else {
             ArrayList<Update> updates = model.showEventUpdates((String) update_events.getValue());
             view.onShowEventUpdates(updates);
@@ -163,17 +163,24 @@ public class Controller {
      * adds an update to an event
      */
     public void addEventUpdate() {
-        String ans = model.addEventUpdate(update_events.valueProperty().getName(), txtarea_update_content.getText());
-        if (ans.equals("ok")) {
-            handleAlert("s_update");
-            txtarea_update_content.setText("");
-            update_events.setValue(null);
-            view.onCloseStage((Stage)update_events.getScene().getWindow());
-        }
+        if (update_events.getValue() == null)
+            handleAlert("no_update_event");
         else {
-            handleAlert("f_update");
-            txtarea_update_content.setText("");
-            update_events.setValue(null);
+            if (txtarea_update_content.getText().equals(""))
+                handleAlert("no_update_content");
+            else {
+                String ans = model.addEventUpdate(update_events.getValue().toString(), txtarea_update_content.getText());
+                if (ans.equals("ok")) {
+                    handleAlert("s_update");
+                    txtarea_update_content.setText("");
+                    update_events.setValue(null);
+                    view.onCloseStage((Stage) update_events.getScene().getWindow());
+                } else {
+                    handleAlert("f_update");
+                    txtarea_update_content.setText("");
+                    update_events.setValue(null);
+                }
+            }
         }
     }
 
@@ -191,13 +198,13 @@ public class Controller {
      */
     private void handleAlert(String s){
         if(s.equals("s_category")) {
-            createAlert("Success!", "Category added successfully", Alert.AlertType.ERROR);
+            createAlert("Success!", "Category added successfully", Alert.AlertType.CONFIRMATION);
         }
         if(s.equals("f_category")) {
             createAlert("We have a problem..", "Failed to add category", Alert.AlertType.ERROR);
         }
         if(s.equals("s_update")) {
-            createAlert("Success!", "Update added successfully", Alert.AlertType.ERROR);
+            createAlert("Success!", "Update added successfully", Alert.AlertType.CONFIRMATION);
         }
         if(s.equals("f_update")) {
             createAlert("We have a problem..", "Failed to add a new update", Alert.AlertType.ERROR);
@@ -206,7 +213,7 @@ public class Controller {
             createAlert("We have a problem..", "You need to choose an event before adding a new feedback!", Alert.AlertType.ERROR);
         }
         if(s.equals("s_feedback")) {
-            createAlert("Success!", "Feedback added successfully", Alert.AlertType.ERROR);
+            createAlert("Success!", "Feedback added successfully", Alert.AlertType.CONFIRMATION);
         }
         if(s.equals("f_feedback")) {
             createAlert("We have a problem..", "You already gave a feedback for that user in that event!", Alert.AlertType.ERROR);
@@ -214,10 +221,16 @@ public class Controller {
         if(s.equals("no_update_event")) {
             createAlert("We have a problem..", "You need to choose an event before adding an new update!", Alert.AlertType.ERROR);
         }
+
         if(s.equals("missing_values")) {
             createAlert("We have a problem..", "You didn't choose a rank or a user to feedback!", Alert.AlertType.ERROR);
         }
-
+        if(s.equals("no_update_content")) {
+            createAlert("We have a problem..", "You need fill the content for the update!", Alert.AlertType.ERROR);
+        }
+        if(s.equals("no_update_event_for_show")) {
+            createAlert("We have a problem..", "You need to choose an event before showing all of its updates!", Alert.AlertType.ERROR);
+        }
     }
 
     /**

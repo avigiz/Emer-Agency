@@ -74,7 +74,7 @@ public class Model {
     }
 
     /**
-     * adds a new update to the databse
+     * adds a new update to the database
      * @param eventName - a given event's name
      * @return - "ok" if addition is successful. else - "notOk"
      */

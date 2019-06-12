@@ -140,6 +140,8 @@ public class View {
             Scene scene = new Scene(root, 600, 400);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
+            Main.controller.update_events.setValue(null);
+            Main.controller.txtarea_update_content.setText("");
             setUpdateScreenEvents(events);
             stage.show();
         }
