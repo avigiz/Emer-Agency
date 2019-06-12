@@ -87,12 +87,12 @@ public class Main extends Application {
 
 
         try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(sqlUsers);
-             PreparedStatement pstmt2 = conn.prepareStatement(sqlEvents);
-             PreparedStatement pstmt3 = conn.prepareStatement(sqlCategories);
-             PreparedStatement pstmt4 = conn.prepareStatement(sqleventUpdates);
-             PreparedStatement pstmt5 = conn.prepareStatement(sqlusersEvents);
-             PreparedStatement pstmt6 = conn.prepareStatement(sqleventFeedbacks)) {
+             Statement pstmt = conn.createStatement();
+             Statement pstmt2 = conn.createStatement();
+             Statement pstmt3 = conn.createStatement();
+             Statement pstmt4 = conn.createStatement();
+             Statement pstmt5 = conn.createStatement();
+             Statement pstmt6 = conn.createStatement()) {
             // create a new table
             pstmt.execute(sqlUsers);
             pstmt2.execute(sqlEvents);
@@ -124,13 +124,13 @@ public class Main extends Application {
                 " VALUES(?,?,?,?,?,?,?,?)";
 
         //usersEvents
-        String sq7 = "INSERT INTO users(eventName, userName, authorization, title)" +
+        String sq7 = "INSERT INTO usersEvents(eventName, userName, authorization, title)" +
                 " VALUES(?,?,?,?)";
-        String sq8 = "INSERT INTO users(eventName, userName, authorization, title)" +
+        String sq8 = "INSERT INTO usersEvents(eventName, userName, authorization, title)" +
                 " VALUES(?,?,?,?)";
-        String sq9 = "INSERT INTO users(eventName, userName, authorization, title)" +
+        String sq9 = "INSERT INTO usersEvents(eventName, userName, authorization, title)" +
                 " VALUES(?,?,?,?)";
-        String sq10 = "INSERT INTO users(eventName, userName, authorization, title)" +
+        String sq10 = "INSERT INTO usersEvents(eventName, userName, authorization, title)" +
                 " VALUES(?,?,?,?)";
 
         try (Connection conn = this.connect2();
