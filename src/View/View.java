@@ -64,7 +64,7 @@ public class View {
      * @param a - a given alert
      */
     public void handleAlert(Alert a) {
-        a.show();
+        a.showAndWait();
     }
 
     /**

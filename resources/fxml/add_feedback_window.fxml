@@ -23,6 +23,6 @@
          </items>
       </ChoiceBox>
       <ChoiceBox fx:id="feedback_users" layoutX="323.0" layoutY="185.0" prefHeight="31.0" prefWidth="133.0" />
-      <Button layoutX="224.0" layoutY="272.0" mnemonicParsing="false" text="Send Feedback" />
+      <Button layoutX="224.0" layoutY="272.0" mnemonicParsing="false" onAction="#sendFeedback" text="Send Feedback" />
    </children>
 </AnchorPane>

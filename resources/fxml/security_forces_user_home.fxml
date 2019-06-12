@@ -7,10 +7,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
    <children>
-      <ChoiceBox fx:id="feedback_events" layoutX="225.0" layoutY="172.0" prefWidth="150.0" />
-      <Text layoutX="213.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choos an Event to Update:" />
+      <ChoiceBox fx:id="feedback_events" layoutX="165.0" layoutY="281.0" prefWidth="150.0" />
+      <Text layoutX="110.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an Event to give a Feedback to:" />
       <Button fx:id="btn_logout" layoutX="31.0" layoutY="28.0" mnemonicParsing="false" onAction="#securityForcesUserLogOut" text="Log Out" />
-      <Button layoutX="388.0" layoutY="172.0" mnemonicParsing="false" onAction="#updateEvent" text="Update Event" />
-      <Button layoutX="214.0" layoutY="281.0" mnemonicParsing="false" onAction="#addEventFeedback" text="Add an Event Feedback" />
+      <Button layoutX="388.0" layoutY="169.0" mnemonicParsing="false" onAction="#updateEvent" text="Update Event" />
+      <Button layoutX="355.0" layoutY="281.0" mnemonicParsing="false" onAction="#addEventFeedback" text="Add an Event Feedback" />
    </children>
 </AnchorPane>
