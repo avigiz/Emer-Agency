@@ -27,7 +27,7 @@ public class Controller {
     public TextArea txtarea_update_content;
     public TableView<Update> tblview_event_updates;
     public TableColumn<Update, String> eventName;
-    public TableColumn<Update, Integer> index;
+    public TableColumn<Update, Integer> ordering;
     public TableColumn<Update, String> description;
     public TableColumn<Update, String> publishedBy;
     public TableColumn<Update, String> publishedDate;
@@ -105,22 +105,27 @@ public class Controller {
      * opens a new window with all the updates of all the events the user is a part of
      */
     public void showEventUpdates() {
-        ArrayList<Update> updates = model.showEventUpdates((String)update_events.getValue());
-        view.onShowEventUpdates(updates);
+        if (update_events.getValue() == null)
+            handleAlert("no_update_event");
+        else {
+            ArrayList<Update> updates = model.showEventUpdates((String) update_events.getValue());
+            view.onShowEventUpdates(updates);
+        }
     }
 
     /**
      * opens a new window in which you can add a new update to the chosen event
      */
     public void updateEvent() {
-        view.onUpdateEvent();
+        ArrayList<String> events = model.getUserEvents();
+        view.onUpdateEvent(events);
     }
 
     /**
      * opens a new window in which you can add an event feedback
      */
     public void addEventFeedback() {
-        if (feedback_events.valueProperty().equals(null))
+        if (feedback_events.getValue() == null)
             handleAlert("no_feedback_event");
         else {
             ArrayList<String> users = model.getEventsUsers(feedback_events.valueProperty().getName());
@@ -135,14 +140,14 @@ public class Controller {
         boolean result = model.sendFeedback((int)feedback_events.getValue(),(String)feedback_users.getValue(),(int)feedback_ranks.getValue());
         if (result) {
             handleAlert("s_feedback");
-            feedback_ranks.valueProperty().set(null);
-            feedback_users.valueProperty().set(null);
+            feedback_ranks.setValue(null);
+            feedback_users.setValue(null);
             view.onCloseStage((Stage)feedback_users.getScene().getWindow());
         }
         else {
             handleAlert("f_feedback");
-            feedback_ranks.valueProperty().set(null);
-            feedback_users.valueProperty().set(null);
+            feedback_ranks.setValue(null);
+            feedback_users.setValue(null);
         }
     }
 
@@ -150,17 +155,17 @@ public class Controller {
      * adds an update to an event
      */
     public void addEventUpdate() {
-        String ans = model.addEventUpdate(update_events.valueProperty().getName());
+        String ans = model.addEventUpdate(update_events.valueProperty().getName(), txtarea_update_content.getText());
         if (ans.equals("ok")) {
             handleAlert("s_update");
             txtarea_update_content.setText("");
-            update_events.valueProperty().set(null);
+            update_events.setValue(null);
             view.onCloseStage((Stage)update_events.getScene().getWindow());
         }
         else {
             handleAlert("f_update");
             txtarea_update_content.setText("");
-            update_events.valueProperty().set(null);
+            update_events.setValue(null);
         }
     }
 
@@ -197,6 +202,9 @@ public class Controller {
         }
         if(s.equals("f_feedback")) {
             createAlert("We have a problem..", "Failed to add a new feedback", Alert.AlertType.ERROR);
+        }
+        if(s.equals("no_update_event")) {
+            createAlert("We have a problem..", "You need to choose an event before adding an new update!", Alert.AlertType.ERROR);
         }
     }
 

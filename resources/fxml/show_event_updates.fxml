@@ -4,13 +4,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="tblview_event_updates" layoutY="1.0" prefHeight="400.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="eventName" prefWidth="111.0" text="Event Name" />
-          <TableColumn fx:id="index" prefWidth="116.0" text="Update Index" />
+          <TableColumn fx:id="ordering" prefWidth="116.0" text="Update Index" />
             <TableColumn fx:id="description" prefWidth="125.0" text="Update Content" />
             <TableColumn fx:id="publishedBy" prefWidth="125.0" text="Published User" />
             <TableColumn fx:id="publishedDate" prefWidth="125.0" text="Published Date" />

@@ -10,19 +10,19 @@ public class Update {
     private SimpleStringProperty eventName;
     private SimpleStringProperty description;
     private SimpleStringProperty publishedDate;
-    private SimpleIntegerProperty index;
+    private SimpleIntegerProperty ordering;
 
-    public Update (int updateId, String publishedBy, String eventName, String description, String publishedDate, int index){
+    public Update (int updateId, String publishedBy, String eventName, String description, String publishedDate, int ordering){
         this.description = new SimpleStringProperty(description);
         this.eventName = new SimpleStringProperty(eventName);
         this.updateId = updateId;
         this.publishedBy  = new SimpleStringProperty(publishedBy);
         this.publishedDate = new SimpleStringProperty(publishedDate);
-        this.index = new SimpleIntegerProperty(index);
+        this.ordering = new SimpleIntegerProperty(ordering);
     }
 
     public String getPublishedDate() {
-        return publishedDate.getValue();
+        return publishedDate.get();
     }
 
     public int getUpdateId() {
@@ -30,18 +30,18 @@ public class Update {
     }
 
     public String getPublishedBy() {
-        return publishedBy.getValue();
+        return publishedBy.get();
     }
 
     public String getDescription() {
-        return description.getValue();
+        return description.get();
     }
 
-    public int getIndex() {
-        return index.getValue();
+    public int getOrdering() {
+        return ordering.get();
     }
 
     public String getEventName() {
-        return eventName.getValue();
+        return eventName.get();
     }
 }

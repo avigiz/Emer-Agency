@@ -86,7 +86,7 @@ public class View {
      */
     private void setEventUpdates(ArrayList<Update> updates) {
         Main.controller.eventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        Main.controller.index.setCellValueFactory(new PropertyValueFactory<>("index"));
+        Main.controller.ordering.setCellValueFactory(new PropertyValueFactory<>("ordering"));
         Main.controller.description.setCellValueFactory(new PropertyValueFactory<>("description"));
         Main.controller.publishedBy.setCellValueFactory(new PropertyValueFactory<>("publishedBy"));
         Main.controller.publishedDate.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
@@ -128,9 +128,34 @@ public class View {
 
     /**
      * displays a new screen in which a user can add a new update to an event
+     * @param events - a given list of event names
      */
-    public void onUpdateEvent() {
-        createNewWindow("Update an Event", "add_update_window.fxml");
+    public void onUpdateEvent(ArrayList<String> events) {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Update an Event");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_update_window.fxml"));
+            loader.setController(Main.controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 400);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            setUpdateScreenEvents(events);
+            stage.show();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+//        createNewWindow("Update an Event", "add_update_window.fxml");
+    }
+
+    /**
+     * sets the possible events in the choice box in the update screen
+     * @param events - a given list of events
+     */
+    private void setUpdateScreenEvents( ArrayList<String> events) {
+        ObservableList<String> list = FXCollections.observableArrayList(events);
+        Main.controller.update_events.setItems(list);
     }
 
     /**
