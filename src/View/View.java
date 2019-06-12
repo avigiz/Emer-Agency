@@ -169,7 +169,7 @@ public class View {
         try {
             Stage stage = new Stage();
             stage.setTitle("Add an Event Feedback");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_update_window.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_feedback_window.fxml"));
             loader.setController(Main.controller);
             Parent root = loader.load();
             Scene scene = new Scene(root, 600, 400);

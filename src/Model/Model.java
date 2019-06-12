@@ -81,7 +81,7 @@ public class Model {
     public String addEventUpdate(String eventName, String updateContent) {
         String insertSQL1 = "INSERT INTO eventUpdates (eventName,updateID,publishedDate,publishedUser,ordering,description)"
                 +   " VALUES(?,?,?,?,?,?)";
-        String selectSQL1 = "SELECT * FROM eventUpdates WHERE eventID = ?";
+        String selectSQL1 = "SELECT * FROM eventUpdates WHERE eventName = ?";
         try (Connection conn = this.connect();
              PreparedStatement insert1 = conn.prepareStatement(insertSQL1);
             ) {
@@ -159,7 +159,7 @@ public class Model {
     public ArrayList<String> getEventsUsers(String eventName){
         ArrayList<String> ans = new ArrayList<String>();
         String sql = "SELECT userName"
-                + " FROM usersEvents WHERE eventName = ? and userName != ?";
+                + " FROM usersEvents WHERE title = ? and userName <> ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -184,13 +184,13 @@ public class Model {
      * @param value - a given feedback value
      * @return - true if addition is successful. else - false
      */
-    public boolean sendFeedback(int eventID, String feedbackedUserName, int value) {
+    public boolean sendFeedback(String eventID, String feedbackedUserName, int value) {
 
-            String sql = "INSERT INTO eventFeedbacks(eventID, feedbackeduserName, feedbackerUserName, value) VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO eventFeedbacks(eventID, feedbackeduserName, feedbackerUserName, value) VALUES(?,?,?,?)";
 
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, eventID);
+                pstmt.setString(1, eventID);
                 pstmt.setString(2, feedbackedUserName);
                 pstmt.setString(3, curr_connected_username);
                 pstmt.setInt(4, value);

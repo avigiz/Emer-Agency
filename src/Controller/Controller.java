@@ -128,7 +128,7 @@ public class Controller {
         if (feedback_events.getValue() == null)
             handleAlert("no_feedback_event");
         else {
-            ArrayList<String> users = model.getEventsUsers(feedback_events.valueProperty().getName());
+            ArrayList<String> users = model.getEventsUsers(feedback_events.valueProperty().getValue().toString());
             view.onAddEventFeedback(users);
         }
     }
@@ -137,17 +137,25 @@ public class Controller {
      * adds a new feedback to an event
      */
     public void sendFeedback() {
-        boolean result = model.sendFeedback((int)feedback_events.getValue(),(String)feedback_users.getValue(),(int)feedback_ranks.getValue());
-        if (result) {
-            handleAlert("s_feedback");
-            feedback_ranks.setValue(null);
-            feedback_users.setValue(null);
-            view.onCloseStage((Stage)feedback_users.getScene().getWindow());
+        if (feedback_users.getValue() == null || feedback_ranks.getValue() == null){
+            handleAlert("missing_values");
         }
         else {
-            handleAlert("f_feedback");
-            feedback_ranks.setValue(null);
-            feedback_users.setValue(null);
+            String eventName = feedback_events.getValue().toString();
+            String userFeed = feedback_users.getValue().toString();
+            Object rank = feedback_ranks.getValue();
+            int Rank = Integer.parseInt((String) rank);
+            boolean result = model.sendFeedback(eventName, userFeed, Rank);
+            if (result) {
+                handleAlert("s_feedback");
+                feedback_ranks.setValue(null);
+                feedback_users.setValue(null);
+                view.onCloseStage((Stage) feedback_users.getScene().getWindow());
+            } else {
+                handleAlert("f_feedback");
+                feedback_ranks.setValue(null);
+                feedback_users.setValue(null);
+            }
         }
     }
 
@@ -208,10 +216,14 @@ public class Controller {
             createAlert("Success!", "Feedback added successfully", Alert.AlertType.CONFIRMATION);
         }
         if(s.equals("f_feedback")) {
-            createAlert("We have a problem..", "Failed to add a new feedback", Alert.AlertType.ERROR);
+            createAlert("We have a problem..", "You already gave a feedback for that user in that event!", Alert.AlertType.ERROR);
         }
         if(s.equals("no_update_event")) {
             createAlert("We have a problem..", "You need to choose an event before adding an new update!", Alert.AlertType.ERROR);
+        }
+
+        if(s.equals("missing_values")) {
+            createAlert("We have a problem..", "You didn't choose a rank or a user to feedback!", Alert.AlertType.ERROR);
         }
         if(s.equals("no_update_content")) {
             createAlert("We have a problem..", "You need fill the content for the update!", Alert.AlertType.ERROR);
