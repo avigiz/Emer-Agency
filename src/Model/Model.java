@@ -74,12 +74,12 @@ public class Model {
     }
 
     /**
-     * adds a new update to the databse
+     * adds a new update to the database
      * @param eventName - a given event's name
      * @return - "ok" if addition is successful. else - "notOk"
      */
     public String addEventUpdate(String eventName, String updateContent) {
-        String insertSQL1 = "INSERT INTO eventUpdates (eventID,updateID,publishedDate,publishedUser,ordering,description)"
+        String insertSQL1 = "INSERT INTO eventUpdates (eventName,updateID,publishedDate,publishedUser,ordering,description)"
                 +   " VALUES(?,?,?,?,?,?)";
         String selectSQL1 = "SELECT * FROM eventUpdates WHERE eventID = ?";
         try (Connection conn = this.connect();
