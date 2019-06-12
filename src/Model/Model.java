@@ -37,11 +37,20 @@ public class Model {
      * @return - true if addition is successful. else - false
      */
     public boolean addCategory(String category) {
-        // TODO : CHECK IF CATEGORY ALREADY EXISTS, AND ADD IT IF NOT
-        return false;
+        String sql = "INSERT INTO categories (categoryName)VALUES(?)";
+        try (Connection conn = this.connect();
+             PreparedStatement insert1 = conn.prepareStatement(sql);
+        ) {
+            insert1.setString(1, category);
+            insert1.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    /**
+        /**
      * gets all the available categories from the database
      * @return - a list containing all the categories
      */
