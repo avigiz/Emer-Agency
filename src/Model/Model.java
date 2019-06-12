@@ -62,11 +62,9 @@ public class Model {
 
             m_results = pstmt.executeQuery();
             List<Category> ans = new ArrayList<>();
-            int i = 1;
             while (m_results.next()){
-                String tmp =(m_results.getString(i));
+                String tmp =(m_results.getString(1));
                 ans.add(new Category(tmp));
-                i++;
             }
             return ans;
         } catch (SQLException e) {
@@ -160,7 +158,7 @@ public class Model {
     public ArrayList<String> getEventsUsers(String eventName){
         ArrayList<String> ans = new ArrayList<String>();
         String sql = "SELECT userName"
-                + "FROM usersEvents WHERE eventName = ? and userName != ?";
+                + " FROM usersEvents WHERE eventName = ? and userName != ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
