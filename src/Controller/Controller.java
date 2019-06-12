@@ -94,11 +94,15 @@ public class Controller {
      * adds a new category
      */
     public void addCategory() {
-        boolean result = model.addCategory(txtfld_category.getText());
-        if (result)
+        String result = model.addCategory(txtfld_category.getText());
+        if (result.equals("ok"))
             handleAlert("s_category");
-        else
-            handleAlert("f_category");
+        else {
+            if (result.equals("exists"))
+                handleAlert("category_exists");
+            else
+                handleAlert("f_category");
+        }
     }
 
     /**
@@ -230,6 +234,9 @@ public class Controller {
         }
         if(s.equals("no_update_event_for_show")) {
             createAlert("We have a problem..", "You need to choose an event before showing all of its updates!", Alert.AlertType.ERROR);
+        }
+        if(s.equals("category_exists")) {
+            createAlert("We have a problem..", "The category already exists!", Alert.AlertType.ERROR);
         }
     }
 
