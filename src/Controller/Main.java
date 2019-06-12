@@ -20,7 +20,7 @@ public class Main extends Application {
         View view = new View();
         controller = new Controller(model, view);
         createAllTables();
-        //addTODB();
+//        addTODB();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         loader.setController(controller);
         Parent root = loader.load();
@@ -62,14 +62,6 @@ public class Main extends Application {
                 + "	rank integer NOT NULL,\n"
                 + "	warnings integer NOT NULL\n"
                 + ");";
-//        String sqleventOrganizations = "CREATE TABLE IF NOT EXISTS eventOrganizations (\n"
-//                + "	eventID integer PRIMARY KEY\n"
-//                + "	title text PRIMARY KEY\n"
-//                + "	publishDate text NOT NULL\n"
-//                + "	postedDispatchUser text NOT NULL\n"
-//                + "	acount-status text NOT NULL\n"
-//                + "	status text NOT NULL\n"
-//                + ");";
         String sqleventUpdates = "CREATE TABLE IF NOT EXISTS eventUpdates (\n"
                 + "	eventName text,\n"
                 + "	updateID text,\n"
@@ -87,11 +79,11 @@ public class Main extends Application {
                 + "PRIMARY KEY (eventName,userName)"
                 + ");";
         String sqleventFeedbacks = "CREATE TABLE IF NOT EXISTS eventFeedbacks (\n"
-                + "	eventName integer,\n"
+                + "	eventName text,\n"
                 + "	feedbackeduserName text,\n"
                 + "	feedbackerUserName text,\n"
                 + "	value integer NOT NULL,\n"
-                + "PRIMARY KEY (eventID,feedbackeduserName,feedbackerUserName)"
+                + "PRIMARY KEY (eventName,feedbackeduserName,feedbackerUserName)"
                 + ");";
 
 

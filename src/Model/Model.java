@@ -197,18 +197,18 @@ public class Model {
 
     /**
      * adds a new feedback to the database
-     * @param eventID - a given event's id
+     * @param eventName - a given event's id
      * @param feedbackedUserName - a given user name to be feedbacked
      * @param value - a given feedback value
      * @return - true if addition is successful. else - false
      */
-    public boolean sendFeedback(String eventID, String feedbackedUserName, int value) {
+    public boolean sendFeedback(String eventName, String feedbackedUserName, int value) {
 
-            String sql = "INSERT INTO eventFeedbacks(eventID, feedbackeduserName, feedbackerUserName, value) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO eventFeedbacks(eventName, feedbackeduserName, feedbackerUserName, value) VALUES(?,?,?,?)";
 
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, eventID);
+                pstmt.setString(1, eventName);
                 pstmt.setString(2, feedbackedUserName);
                 pstmt.setString(3, curr_connected_username);
                 pstmt.setInt(4, value);
