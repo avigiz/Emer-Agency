@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -36,17 +37,25 @@ public class Model {
      * @param category - a new category
      * @return - true if addition is successful. else - false
      */
-    public boolean addCategory(String category) {
+    public String addCategory(String category) {
         String sql = "INSERT INTO categories (categoryName)VALUES(?)";
+        String sql2 = "SELECT * FROM categories";
         try (Connection conn = this.connect();
              PreparedStatement insert1 = conn.prepareStatement(sql);
+             PreparedStatement select1 = conn.prepareStatement(sql2)
         ) {
+            ResultSet rs = select1.executeQuery();
+            while (rs.next()){
+                if (rs.getString("categoryName").equals(category)){
+                    return "exists";
+                }
+            }
             insert1.setString(1, category);
             insert1.executeUpdate();
-            return true;
+            return "ok";
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return "notOk";
         }
     }
 
@@ -84,15 +93,24 @@ public class Model {
         String selectSQL1 = "SELECT * FROM eventUpdates WHERE eventName = ?";
         try (Connection conn = this.connect();
              PreparedStatement insert1 = conn.prepareStatement(insertSQL1);
+             PreparedStatement select1 = conn.prepareStatement(selectSQL1)
             ) {
+            select1.setString(1,eventName);
+            ResultSet rs = select1.executeQuery();
+            int i = 1;
+            while(rs.next()){
+                i++;
+            }
             insert1.setString(1,eventName);
             Random rnd = new Random();
             Integer random = rnd.nextInt(100);
             insert1.setString(2,random.toString());
-            insert1.setString(3,Calendar.getInstance().toString());
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            insert1.setString(3,formatter.format(Calendar.getInstance().getTime()));
             insert1.setString(4,curr_connected_username);
-            insert1.setInt(5,selectSQL1.length()+1);
+            insert1.setInt(5,i);
             insert1.setString(6,updateContent);
+            insert1.executeUpdate();
             return "ok";
         } catch (SQLException e) {
             System.out.println(e.getMessage());

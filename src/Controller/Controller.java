@@ -169,7 +169,9 @@ public class Controller {
             if (txtarea_update_content.getText().equals(""))
                 handleAlert("no_update_content");
             else {
-                String ans = model.addEventUpdate(update_events.getValue().toString(), txtarea_update_content.getText());
+                String eventName = update_events.getValue().toString();
+                String updateContent = txtarea_update_content.getText();
+                String ans = model.addEventUpdate(eventName, updateContent);
                 if (ans.equals("ok")) {
                     handleAlert("s_update");
                     txtarea_update_content.setText("");
