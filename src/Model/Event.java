@@ -53,12 +53,12 @@ public class Event extends Observable {
         this.publishedTime = publishedTime;
     }
 
-    public AUser getPostedDispatchUser() {
-        return postedDispatchUser;
+    public String getPostedDispatchUser() {
+        return userName;
     }
 
-    public void setPostedDispatchUser(AUser postedDispatchUser) {
-        this.postedDispatchUser = postedDispatchUser;
+    public void setPostedDispatchUser(String userName) {
+        this.userName = userName;
     }
 
     public TreeMap<Integer, Update> getUpdates() {
