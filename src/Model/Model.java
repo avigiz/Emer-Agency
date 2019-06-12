@@ -100,7 +100,7 @@ public class Model {
     public ArrayList<Update> showEventUpdates(String title) {
             ArrayList<Update> ans = new ArrayList<Update>();
             String sql = "SELECT title"
-                    + "FROM eventUpdates WHERE EventID = ?";
+                    + " FROM eventUpdates WHERE EventID = ?";
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -127,7 +127,7 @@ public class Model {
     public ArrayList<String> getUserEvents(){
         ArrayList<String> ans = new ArrayList<String>();
         String sql = "SELECT title"
-                + "FROM usersEvents WHERE userName = ?";
+                + " FROM usersEvents WHERE userName = ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

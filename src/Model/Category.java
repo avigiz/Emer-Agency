@@ -10,7 +10,7 @@ public class Category {
         this.categoryName = new SimpleStringProperty(name);
     }
 
-    public SimpleStringProperty getcategoryName() {
-        return categoryName;
+    public String getCategoryName() {
+        return categoryName.getValue();
     }
 }

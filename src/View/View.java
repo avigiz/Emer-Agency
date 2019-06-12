@@ -39,7 +39,7 @@ public class View {
             Scene scene = new Scene(root, 600, 400);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
-            getHomeScreenEvents(events);
+            setHomeScreenEvents(events);
             stage.show();
         }
         catch (Exception e) {
@@ -52,7 +52,7 @@ public class View {
      * sets the possible events in the choice box in the user's home screen
      * @param events - a given list of events
      */
-    private void getHomeScreenEvents( ArrayList<String> events) {
+    private void setHomeScreenEvents( ArrayList<String> events) {
         ObservableList<String> list = FXCollections.observableArrayList(events);
         Main.controller.feedback_events.setItems(list);
     }
@@ -104,7 +104,7 @@ public class View {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/show_categories.fxml"));
             loader.setController(Main.controller);
             Parent root = loader.load();
-            Scene scene = new Scene(root, 600, 400);
+            Scene scene = new Scene(root, 170, 400);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             setNewCategories(ans);

@@ -21,27 +21,27 @@ public class Update {
         this.index = new SimpleIntegerProperty(index);
     }
 
-    public SimpleStringProperty getPublishedDate() {
-        return publishedDate;
+    public String getPublishedDate() {
+        return publishedDate.getValue();
     }
 
     public int getUpdateId() {
         return updateId;
     }
 
-    public SimpleStringProperty getPublishedBy() {
-        return publishedBy;
+    public String getPublishedBy() {
+        return publishedBy.getValue();
     }
 
-    public SimpleStringProperty getDescription() {
-        return description;
+    public String getDescription() {
+        return description.getValue();
     }
 
-    public SimpleIntegerProperty getIndex() {
-        return index;
+    public int getIndex() {
+        return index.getValue();
     }
 
-    public SimpleStringProperty getEventName() {
-        return eventName;
+    public String getEventName() {
+        return eventName.getValue();
     }
 }
